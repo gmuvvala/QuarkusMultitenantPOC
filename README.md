@@ -60,19 +60,12 @@ The application is configured for multi-tenant operation in `application.propert
 ```bash
 mvn quarkus:dev
 ```
-
-### Production Build
-```bash
-mvn clean package
-java -jar target/multiTenantPOC-dev.jar
-```
-
 ## API Usage
 
 
 ### Execute Workflow
 ```bash
-curl -H "X-Tenant-ID: c1" http://localhost:8080/workflow/invoke
+curl -X POST -H "X-Tenant-ID:c1"   http://localhost:8080/workflow/invoke
 ```
 
 ## Project Structure
