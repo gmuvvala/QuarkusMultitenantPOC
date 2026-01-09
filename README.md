@@ -2,6 +2,7 @@
 
 A proof-of-concept application demonstrating multi-tenancy in Quarkus with DBOS Transact integration for reliable workflow execution.
 
+
 ## Features
 
 - **Multi-tenant Architecture**: Database-per-tenant isolation using Quarkus datasources
@@ -16,6 +17,7 @@ The application implements a database-per-tenant multi-tenancy model where:
 - Each tenant has a separate MySQL database (c1, c2, etc.)
 - Tenant resolution is handled via HTTP headers
 - DBOS Transact ensures reliable workflow execution across tenant operations
+- **DBOS workflow steps requires explicit request context  activation for multi tenancy to work** 
 
 ## Prerequisites
 
@@ -116,5 +118,4 @@ DBOS Transact provides:
 - Hibernate ORM with Panache for simplified data access
 - RESTEasy Jackson for JSON serialization
 - File-based logging enabled for debugging# QuarkusMultitenantPOC
-# QuarkusMultitenantPOC
 # QuarkusMultitenantPOC

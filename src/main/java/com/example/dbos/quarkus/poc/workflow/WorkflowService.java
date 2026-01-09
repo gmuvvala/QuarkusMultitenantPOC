@@ -25,28 +25,42 @@ public class WorkflowService implements WorkflowInterface {
 
     @Workflow
     public void invokeWorkflow(String clientId) {
-        TenantContext.set(clientId);
-        service.step1();
-        service.step2();
+        service.step1(clientId);
+        service.step2(clientId);
+    }
+
+
+    @Override
+    @Step
+    public void step1(String tenantId) {
+        ClientDataService dataService = Arc.container().instance(ClientDataService.class).get();
+        var requestContext = Arc.container().requestContext();
+        requestContext.activate(); // required for quarkus hibernate multi tenancy resolver
+        try {
+            TenantContext.set(tenantId);
+            List<RefClient> clients = dataService.getClients();
+            dataService.logClients(clients);
+        } finally {
+            TenantContext.clear();
+            requestContext.terminate();
+        }
     }
 
     @Override
     @Step
-    public void step1() {
+    public void step2(String tenantId) {
         ClientDataService dataService = Arc.container().instance(ClientDataService.class).get();
-        String tenantId = TenantContext.get() != null ? TenantContext.get() : "c1";
-        List<RefClient> clients = dataService.getClients(tenantId);
-        dataService.logClients(clients);
 
-    }
-
-    @Override
-    @Step
-    public void step2() {
-        ClientDataService dataService = Arc.container().instance(ClientDataService.class).get();
-        String tenantId = TenantContext.get() != null ? TenantContext.get() : "c1";
-        List<RefClientAddress> clientAddress = dataService.getClientAddress(tenantId);
-        dataService.logClientAddress(clientAddress);
+        var requestContext = Arc.container().requestContext();
+        requestContext.activate();
+        try {
+            TenantContext.set(tenantId);
+            List<RefClientAddress> clientAddress = dataService.getClientAddress();
+            dataService.logClientAddress(clientAddress);
+        } finally {
+            TenantContext.clear();
+            requestContext.terminate();
+        }
 
     }
 }

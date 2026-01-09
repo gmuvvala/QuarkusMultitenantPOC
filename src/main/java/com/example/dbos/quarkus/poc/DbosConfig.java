@@ -28,7 +28,7 @@ public class DbosConfig {
                 .withDbPassword("dbos");
         DBOS.configure(config);
 
-        workflowService.toString();
+        workflowService.toString(); // Don't delete this. required to load interface before  initializing dbos
         // Your application runs here
         System.out.println("DBOS started on startup.");
     }

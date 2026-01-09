@@ -12,8 +12,8 @@ public interface WorkflowInterface {
     void invokeWorkflow(String clientId);
 
     @Transactional
-    void step1();
+    void step1(String clientId);
 
     @Transactional
-    void step2();
+    void step2(String clientId);
 }

@@ -20,15 +20,13 @@ public class ClientDataService {
     RefClientAddressRepository refClientAddressRepository;
 
     @Transactional
-    public List<RefClient> getClients(String tenantId) {
-        Log.info("Getting clients for tenant: " + tenantId);
-        return refClientRepository.findAllByTenant(tenantId);
+    public List<RefClient> getClients() {
+        return refClientRepository.findAll();
     }
 
     @Transactional
-    public List<RefClientAddress> getClientAddress(String tenantId) {
-        Log.info("Getting client Address  for tenant: " + tenantId);
-        return refClientAddressRepository.findAllByTenant(tenantId);
+    public List<RefClientAddress> getClientAddress() {
+        return refClientAddressRepository.findAll();
     }
 
 

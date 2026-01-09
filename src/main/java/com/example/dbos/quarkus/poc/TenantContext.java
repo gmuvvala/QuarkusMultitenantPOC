@@ -2,7 +2,7 @@ package com.example.dbos.quarkus.poc;
 
 import jakarta.enterprise.context.RequestScoped;
 
-@RequestScoped
+
 public class TenantContext {
 
     private static final ThreadLocal<String> CURRENT_TENANT = new ThreadLocal<>();

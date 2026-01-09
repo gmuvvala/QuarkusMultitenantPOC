@@ -17,7 +17,7 @@ public class HibernateTenantResolver implements TenantResolver {
 
     @Override
     public String resolveTenantId() {
-        Log.info("TenantContext.get() = " + TenantContext.get());
+        //Log.info("TenantContext.get() = " + TenantContext.get());
         String tenantId = TenantContext.get();
         if (tenantId != null && (tenantId.equals("c1") || tenantId.equals("c2"))) {
             return tenantId;
